@@ -15,6 +15,7 @@ import progressRoute from "./routes/courseProgress.route.js"
 import { Course } from "./models/course.model.js";
 import  User  from './models/user.model.js'; // Adjust path as needed
 import isAuthenticated from "./middlewares/isAuthenticated.js";
+import path from "path";
 
 dotenv.config({})
 
@@ -22,6 +23,8 @@ dotenv.config({})
 connectDB();
 const app = express();
 const PORT = process.env.PORT || 3000
+
+const _dirname = path.resolve();
 
 // apis:- use middleware,
 // default middleware
@@ -95,6 +98,11 @@ app.use("/api/v1/purchase", purchaseRoute);
 app.use("/api/v1/progress", progressRoute);
 
 //
+app.use(express.static(path.join(_dirname,"/client/adit/dist")));
+app.get('*',(_,res)=>{
+    res.sendFile(path.resolve(_dirname,"client","adit","dist","index.html"));
+})
+
 app.listen(PORT, ()=> {
     console.log(`Server run at PORT ${PORT}`);
 })

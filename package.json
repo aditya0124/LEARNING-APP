@@ -4,7 +4,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon server/index.js",
+    "build": "npm install && npm install --prefix client/adit && npm run build --prefix client/adit",
+    "start": "nodemon server/index.js"
   },
   "keywords": [],
   "author": "",
